@@ -1,0 +1,4 @@
+ARG ODOO_VERSION
+FROM tecnativa/doodba:8.0-onbuild
+
+USER 1000

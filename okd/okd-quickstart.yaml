@@ -138,6 +138,7 @@ objects:
       #dockerfile: ""
     strategy:
       dockerStrategy:
+        dockerfilePath: Dockerfile.${IMAGE_VERSION}
         from:
           kind: "ImageStreamTag"
           name: "doodba:${IMAGE_VERSION}-onbuild"
