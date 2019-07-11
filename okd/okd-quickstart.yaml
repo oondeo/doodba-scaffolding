@@ -128,7 +128,7 @@ objects:
     output:
       to:
         kind: "ImageStreamTag"
-        name: "odoo-${IMAGE_VERSION}-${NAME}:latest"  
+        name: "${NAME}:latest"  
     source:
       type: Git
       git:
@@ -137,13 +137,16 @@ objects:
       contextDir: "odoo" 
       #dockerfile: ""
     strategy:
-      sourceStrategy:
+      dockerStrategy:
         from:
           kind: "ImageStreamTag"
-          name: "doodba:${IMAGE_VERSION}"
+          name: "doodba:${IMAGE_VERSION}-onbuild"
+          namespace: ${NAMESPACE}
         # scripts: "http://somehost.com/scripts_directory"
         # incremental: true 
         env:
+        - name: USER_NAME
+          value: oodo
         - name: UID
           value: "1001"
         - name: GID
@@ -197,7 +200,7 @@ objects:
       spec:
         containers:
         - env:
-          - PGDATABASE:
+          - name: PGDATABASE
             value: ${DATABASE_NAME}
           - name: PGHOST
             value: "${DATABASE_SERVICE_NAME}"
@@ -211,6 +214,8 @@ objects:
               secretKeyRef:
                 key: database-password
                 name: "${NAME}"
+          - name: USER_NAME
+            value: oodo                
           - name: UID
             value: "1001"
           - name: GID
@@ -323,6 +328,7 @@ parameters:
     are not using the default branch.
   displayName: Git Reference
   name: SOURCE_REPOSITORY_REF
+  value: master
 - description: The exposed hostname that will route to the CakePHP service, if left
     blank a value will be defaulted.
   displayName: Application Hostname

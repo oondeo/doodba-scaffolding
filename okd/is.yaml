@@ -2,9 +2,9 @@ apiVersion: v1
 kind: ImageStream
 metadata:
   annotations:
-    openshift.io/display-name: Odoo
+    openshift.io/display-name: Odoo Builder Image
   generation: 13
-  name: odoo
+  name: doodba
   namespace: openshift
 spec:
   lookupPolicy:
