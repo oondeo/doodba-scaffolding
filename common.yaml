@@ -16,6 +16,7 @@ services:
         hostname: "$SMTP_REAL_NON_CANONICAL_DEFAULT"
         tty: true
         volumes:
+            - $HOME:/home/odoo:rw,z
             - filestore:/var/lib/odoo:z
         labels:
             traefik.docker.network: "inverseproxy_shared"

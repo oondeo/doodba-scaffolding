@@ -1,0 +1,357 @@
+# odoo initialize database: odoo -d scout10.com --db_host $HOST --db_user $POSTGRES_USER --db_password $POSTGRES_PASSWORD --no-http
+---
+apiVersion: v1
+kind: Template
+labels:
+  app: odoo
+  template: odoo-erp
+message: |-
+  The following service(s) have been created in your project: ${NAME}.
+
+  For more information about using this template, including OpenShift considerations, see https://github.com/oondeo/odoo-docker.git.
+metadata:
+  annotations:
+    description: A deployment of odoo .
+    iconClass: icon-python
+    openshift.io/display-name: Odoo ERP
+    openshift.io/documentation-url: https://doc.odoohq.com/
+    openshift.io/long-description: This template defines resources needed to run an
+      Odoo application.
+    openshift.io/provider-display-name: OONDEO C.B.
+    openshift.io/support-url: https://www.oondeo.es
+    tags: quickstart,python,odoo,odoo
+    template.openshift.io/bindable: 'false'
+  name: odoo-erp
+objects:
+- apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    name: "${NAME}"
+  data:
+    odoo.conf: |
+      [options]
+      data_dir = /var/lib/odoo
+      log_handler = [':INFO','werkzeug:CRITICAL']
+      ; admin_passwd = admin
+      ; csv_internal_sep = ,
+      ; db_maxconn = 64
+      ; db_name = False
+      ; db_template = template1
+      ; dbfilter = .*
+      ; debug_mode = False
+      ; email_from = False
+      ; limit_memory_hard = 2684354560
+      ; limit_memory_soft = 2147483648
+      ; limit_request = 8192
+      ; limit_time_cpu = 60
+      ; limit_time_real = 120
+      ; list_db = True
+      ; log_db = False
+      ; log_handler = [':INFO']
+      ; log_level = info
+      ; logfile = None
+      ; longpolling_port = 7072
+      ; max_cron_threads = 2
+      ; osv_memory_age_limit = 1.0
+      ; osv_memory_count_limit = False
+      ; smtp_password = False
+      ; smtp_port = 25
+      ; smtp_server = localhost
+      ; smtp_ssl = False
+      ; smtp_user = False
+      ; workers = 0
+      ; xmlrpc = True
+      ; xmlrpc_interface =
+      ; xmlrpc_port = 7073
+      ; xmlrpcs = True
+      ; xmlrpcs_interface =
+      ; xmlrpcs_port = 8071
+- apiVersion: v1
+  kind: Secret
+  metadata:
+    name: "${NAME}"
+  stringData:
+    database-password: "${DATABASE_PASSWORD}"
+    database-user: "${DATABASE_USER}"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      description: Exposes and load balances the application pods
+      service.alpha.openshift.io/dependencies: '[{"name": "${DATABASE_SERVICE_NAME}",
+        "kind": "Service"}]'
+    name: "${NAME}"
+  spec:
+    ports:
+    - name: web
+      port: 7073
+      targetPort: 7073
+    - name: chat
+      port: 7072
+      targetPort: 7072     
+    selector:
+      name: "${NAME}"  
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: "${NAME}"
+  spec:
+    host: "${APPLICATION_DOMAIN}"
+    port:
+      targetPort: web    
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge    
+    to:
+      kind: Service
+      name: "${NAME}"
+- apiVersion: v1
+  kind: Route
+  metadata:
+    name: "${NAME}-longpolling"
+  spec:
+    host: "${APPLICATION_DOMAIN}"
+    path: /longpolling
+    port:
+      targetPort: chat    
+    tls:
+      insecureEdgeTerminationPolicy: Redirect
+      termination: edge    
+    to:
+      kind: Service
+      name: "${NAME}"      
+- apiVersion: "v1"
+  kind: "BuildConfig"
+  metadata:
+    name: "${NAME}"
+  spec:
+    output:
+      to:
+        kind: "ImageStreamTag"
+        name: "odoo-${IMAGE_VERSION}-${NAME}:latest"  
+    source:
+      type: Git
+      git:
+        uri: ${SOURCE_REPOSITORY_URL}
+        ref: ${SOURCE_REPOSITORY_REF} 
+      contextDir: "odoo" 
+      #dockerfile: ""
+    strategy:
+      sourceStrategy:
+        from:
+          kind: "ImageStreamTag"
+          name: "doodba:${IMAGE_VERSION}"
+        # scripts: "http://somehost.com/scripts_directory"
+        # incremental: true 
+        env:
+        - name: UID
+          value: "1001"
+        - name: GID
+          value: "1001"
+        - name: UMASK
+          value: "000"
+        - name: AGGREGATE
+          value: "false"
+        - name: DEPTH_DEFAULT
+          value: "100"
+        - name: ODOO_VERSION
+          value: ${IMAGE_VERSION}
+        - name: PYTHONOPTIMIZE
+          value: "2"
+        - name: PIP_INSTALL_ODOO
+          value: "true"
+        - name: CLEAN
+          value: "true"
+        - name: COMPILE
+          value: "true"
+        - name: DOODBA_ENVIRONMENT
+          value: "prod"
+        - name: LIST_DB
+          value: "false"
+        - name: PTVSD_ENABLE
+          value: "0"
+        - name: PGDATABASE
+          value: ${DATABASE_NAME}
+        - name: PYTHONPATH
+          value: /opt/odoo/custom/src/odoo
+        - name: INITIAL_LANG
+          value: es
+        - name: SMTP_SERVER
+          value: smtplocal       
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      description: Defines how to deploy the application server
+      template.alpha.openshift.io/wait-for-ready: 'true'
+    name: "${NAME}"
+  spec:
+    replicas: 1
+    selector:
+      name: "${NAME}"
+    template:
+      metadata:
+        labels:
+          name: "${NAME}"
+        name: "${NAME}"
+      spec:
+        containers:
+        - env:
+          - PGDATABASE:
+            value: ${DATABASE_NAME}
+          - name: PGHOST
+            value: "${DATABASE_SERVICE_NAME}"
+          - name: PGUSER
+            valueFrom:
+              secretKeyRef:
+                key: database-user
+                name: "${NAME}"
+          - name: PGPASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: database-password
+                name: "${NAME}"
+          - name: UID
+            value: "1001"
+          - name: GID
+            value: "1001"
+          - name: UMASK
+            value: "000"
+          - name: AGGREGATE
+            value: "false"
+          - name: DEPTH_DEFAULT
+            value: "100"
+          - name: ODOO_VERSION
+            value: ${IMAGE_VERSION}
+          - name: PYTHONOPTIMIZE
+            value: "2"
+          - name: PIP_INSTALL_ODOO
+            value: "true"
+          - name: CLEAN
+            value: "true"
+          - name: COMPILE
+            value: "true"
+          - name: DOODBA_ENVIRONMENT
+            value: "prod"
+          - name: LIST_DB
+            value: "false"
+          - name: PTVSD_ENABLE
+            value: "0"
+          - name: PYTHONPATH
+            value: /opt/odoo/custom/src/odoo
+          - name: INITIAL_LANG
+            value: es
+          - name: SMTP_SERVER
+            value: smtplocal                   
+          image: " "
+          name: odoo
+          # args:
+          # - odoo
+          # - --no-database-list
+          volumeMounts:
+          - mountPath: "/var/lib/odoo"
+            name: "${NAME}-data"
+          - mountPath: "/etc/odoo"
+            name: "odoo-config"
+          resources:
+            limits:
+              memory: "${MEMORY_LIMIT}"
+        volumes:
+        - name: "${NAME}-data"
+          persistentVolumeClaim:
+            claimName: "${NAME}"
+        - name: "odoo-config"
+          configMap:
+            name: "${NAME}"          
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - odoo
+        from:
+          kind: ImageStreamTag
+          name: "odoo-${IMAGE_VERSION}-${NAME}:latest"
+          # namespace: "${NAMESPACE}"
+      type: ImageChange
+    - type: ConfigChange
+- apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: "${NAME}"
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    storageClassName: local-storage
+    selector:
+      matchLabels:
+        name: "${NAME}"         
+    resources:
+      requests:
+        storage: "${VOLUME_CAPACITY}"        
+parameters:
+- description: The name assigned to all of the frontend objects defined in this template.
+  displayName: Name
+  name: NAME
+  required: true
+  value: odoo-erp
+- description: The OpenShift Namespace where the ImageStream resides.
+  displayName: Namespace
+  name: NAMESPACE
+  required: true
+  value: openshift
+- description: Version of Odoo (latest,12.0,11.0...)
+  displayName: Odoo Version
+  name: IMAGE_VERSION
+  required: true
+  value: '11.0'
+- description: Maximum amount of memory container can use.
+  displayName: Memory Limit
+  name: MEMORY_LIMIT
+  required: true
+  value: 1024Mi
+- description: Volume space available for data, e.g. 512Mi, 2Gi
+  displayName: Volume Capacity
+  name: VOLUME_CAPACITY
+  required: true
+  value: 12Gi
+- description: The URL of the repository with your application source code.
+  displayName: Git Repository URL
+  name: SOURCE_REPOSITORY_URL
+  required: true
+  value: https://github.com/oondeo/doodba-scaffolding
+- description: Set this to a branch name, tag or other ref of your repository if you
+    are not using the default branch.
+  displayName: Git Reference
+  name: SOURCE_REPOSITORY_REF
+- description: The exposed hostname that will route to the CakePHP service, if left
+    blank a value will be defaulted.
+  displayName: Application Hostname
+  name: APPLICATION_DOMAIN
+  value: ''
+- description: Github trigger secret.  A difficult to guess string encoded as part
+    of the webhook URL.  Not encrypted.
+  displayName: GitHub Webhook Secret
+  from: "[a-zA-Z0-9]{40}"
+  generate: expression
+  name: GITHUB_WEBHOOK_SECRET
+- displayName: Database Service Name
+  name: DATABASE_SERVICE_NAME
+  required: true
+  value: postgresql.oondeo
+- description: 'Database engine: postgresql, mysql or sqlite (default).'
+  displayName: Database Engine
+  name: DATABASE_ENGINE
+  required: true
+  value: postgresql
+- displayName: Database Name
+  name: DATABASE_NAME
+  required: true
+  value: odoo
+- displayName: Database User
+  name: DATABASE_USER
+  required: true
+  value: odoo
+- displayName: Database Password
+  from: "[a-zA-Z0-9]{16}"
+  generate: expression
+  name: DATABASE_PASSWORD
