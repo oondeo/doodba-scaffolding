@@ -7,6 +7,12 @@ docker-compose -f devel.yaml up
 
 # Todo
 
+- Fix addons folders
+
+- Filestore is on /home/odoo/.local
+
+- Entrypoint params is not working
+
 - Convert setup-devel.yaml (up) + devel.yaml (build+up) to Openshift
 
 - oca_dependencies.txt: 

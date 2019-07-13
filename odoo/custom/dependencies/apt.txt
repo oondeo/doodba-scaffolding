@@ -1,6 +1,5 @@
 python3-crypto
 python3-paramiko
-python3-num2words
 python3-gevent
 python3-lasso
 python3-tz

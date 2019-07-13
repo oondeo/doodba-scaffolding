@@ -1,6 +1,7 @@
 git+https://github.com/OCA/openupgradelib.git@master
 unicodecsv
 unidecode
+num2words
 phonenumbers
 oauthlib
 redis
