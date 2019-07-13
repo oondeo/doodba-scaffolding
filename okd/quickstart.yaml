@@ -50,7 +50,7 @@ objects:
       ; log_handler = [':INFO']
       ; log_level = info
       ; logfile = None
-      ; longpolling_port = 7072
+      ; longpolling_port = 8072
       ; max_cron_threads = 2
       ; osv_memory_age_limit = 1.0
       ; osv_memory_count_limit = False
@@ -62,7 +62,7 @@ objects:
       ; workers = 0
       ; xmlrpc = True
       ; xmlrpc_interface =
-      ; xmlrpc_port = 7073
+      ; xmlrpc_port = 8069
       ; xmlrpcs = True
       ; xmlrpcs_interface =
       ; xmlrpcs_port = 8071
@@ -84,11 +84,11 @@ objects:
   spec:
     ports:
     - name: web
-      port: 7073
-      targetPort: 7073
+      port: 8069
+      targetPort: 8069
     - name: chat
-      port: 7072
-      targetPort: 7072     
+      port: 8072
+      targetPort: 8072     
     selector:
       name: "${NAME}"  
 - apiVersion: v1
@@ -155,7 +155,7 @@ objects:
         - name: UMASK
           value: "000"
         - name: AGGREGATE
-          value: "false"
+          value: "true"
         - name: DEPTH_DEFAULT
           value: "100"
         - name: ODOO_VERSION
@@ -276,7 +276,7 @@ objects:
         - odoo
         from:
           kind: ImageStreamTag
-          name: "odoo-${IMAGE_VERSION}-${NAME}:latest"
+          name: "${NAME}:latest"
           # namespace: "${NAMESPACE}"
       type: ImageChange
     - type: ConfigChange

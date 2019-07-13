@@ -1,3 +1,0 @@
-FROM tecnativa/doodba:11.0-onbuild
-
-ONBUILD USER 1000

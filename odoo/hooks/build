@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+echo "------ HOOK START - BUILD -------"
+printenv
+
+if [ "$DOCKER_TAG" == "latest" ]
+then
+    DOCKER_TAG="12.0"
+fi
+docker build --build-arg UID=1000 --build-arg GID=0 --build-arg ODOO_VERSION=$DOCKER_TAG -t $IMAGE_NAME .
+
+echo "------ HOOK END - BUILD -------"

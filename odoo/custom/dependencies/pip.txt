@@ -1,3 +1,19 @@
 git+https://github.com/OCA/openupgradelib.git@master
 unicodecsv
 unidecode
+phonenumbers
+oauthlib
+redis
+psycogreen
+psycogreen
+vobject
+qrcode
+zeep
+xlrd
+xlsxwriter
+ptpython
+-r https://raw.githubusercontent.com/OCA/l10n-spain/11.0/requirements.txt
+-r https://raw.githubusercontent.com/OCA/server-auth/11.0/requirements.txt
+-r https://raw.githubusercontent.com/OCA/server-backend/11.0/requirements.txt
+-r https://raw.githubusercontent.com/OCA/server-tools/11.0/requirements.txt
+-r https://raw.githubusercontent.com/OCA/web/11.0/requirements.txt
