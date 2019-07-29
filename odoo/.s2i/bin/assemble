@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+shopt -s dotglob
+echo "---> Installing application source ..."
+mv /tmp/odoo/custom/* "/opt/odoo/custom"
+
+# /opt/odoo/common/build && sync
+if [ "$AGGREGATE" = true ]; then
+    autoaggregate
+fi
+
+/opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
+
+if [ "$COMPILE" = true ]; then
+    log INFO Compiling all Python code in /opt/odoo
+    python -m compileall -q /opt/odoo
+fi

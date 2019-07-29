@@ -1,9 +1,18 @@
+AGGREGATE=true
+COMPILE=true
+PYTHONOPTIMIZE="2"
+CLEAN="2"
+DOODBA_ENVIRONMENT="prod"
+LIST_DB="false"
+PTVSD_ENABLE="0"
+PYTHONPATH="/opt/odoo/custom/src/odoo"
+
 # XXX Customize for your project
 # Odoo
-ODOO_MAJOR=11
-ODOO_MINOR=11.0
+#ODOO_MAJOR=11
+#ODOO_MINOR=11.0
 #INITIAL_LANG=
-ODOO_IMAGE=docker.io/myuser/myproject-odoo
+#ODOO_IMAGE=docker.io/myuser/myproject-odoo
 
 ODOO_PROXY_MODE=true
 
@@ -13,9 +22,9 @@ DOMAIN_PROD=www.example.com
 DOMAIN_PROD_ALT=example.com
 
 # Database
-DB_VERSION=10
-DB_USER=odoo
-DB_FILTER=.*
+#DB_VERSION=10
+#DB_USER=odoo
+#DB_FILTER=.*
 
 # Real SMTP relay
 SMTP_REAL_MAILNAME=example.com
