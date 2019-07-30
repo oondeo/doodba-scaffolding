@@ -13,8 +13,10 @@ zeep
 xlrd
 xlsxwriter
 ptpython
--r https://raw.githubusercontent.com/OCA/l10n-spain/11.0/requirements.txt
--r https://raw.githubusercontent.com/OCA/server-auth/11.0/requirements.txt
--r https://raw.githubusercontent.com/OCA/server-backend/11.0/requirements.txt
--r https://raw.githubusercontent.com/OCA/server-tools/11.0/requirements.txt
--r https://raw.githubusercontent.com/OCA/web/11.0/requirements.txt
+-r https://raw.githubusercontent.com/OCA/l10n-spain/${ODOO_VERSION}/requirements.txt
+-r https://raw.githubusercontent.com/OCA/server-auth/${ODOO_VERSION}/requirements.txt
+-r https://raw.githubusercontent.com/OCA/server-backend/${ODOO_VERSION}/requirements.txt
+-r https://raw.githubusercontent.com/OCA/server-tools/${ODOO_VERSION}/requirements.txt
+-r https://raw.githubusercontent.com/OCA/web/${ODOO_VERSION}/requirements.txt
+-r https://raw.githubusercontent.com/OCA/connector/${ODOO_VERSION}/requirements.txt
+-r https://raw.githubusercontent.com/OCA/rest-framework/${ODOO_VERSION}/requirements.txt
