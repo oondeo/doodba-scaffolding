@@ -12,6 +12,7 @@ ENV PATH=$HOME/.local/bin/:$PATH \
 
 
 ENV NAME=odoo \
+    ODOO_VERSION=${ODOO_VERSION} \
     VERSION=${ODOO_VERSION} \
     ARCH=x86_64
 

@@ -1,3 +1,18 @@
+---
+# ONLY:
+#   ODOO_VERSION:
+#     - '10.0'
+#     - '11.0'
+#     - '12.0'
+server-ux: ["*"]
+social: ["*"]
+stock-logistics-barcode: ["*"]
+web: ["*"]
+website: ["*"]
+sale-workflow: ["*"]
+queue: ["*"]
+server-auth: ["*"]
+server-backend: ["*"]
 account-financial-reporting: ["*"]
 rest-framework: ["*"]
 connector: ["*"]
@@ -6,18 +21,13 @@ crm: ["*"]
 e-commerce: ["*"]
 event: ["*"]
 hr: ["*"]
-l10n-spain: ["*"]
 partner-contact: ["*"]
 product-attribute: ["*"]
 purchase-workflow: ["*"]
-queue: ["*"]
-sale-workflow: ["*"]
-server-auth: ["*"]
-server-backend: ["*"]
 server-brand: ["*"]
 server-tools: ["*"]
-server-ux: ["*"]
-social: ["*"]
-stock-logistics-barcode: ["*"]
-web: ["*"]
-website: ["*"]
+---
+ONLY:
+  LANG:
+    - 'es_ES.UTF-8'
+l10n-spain: ["*"]

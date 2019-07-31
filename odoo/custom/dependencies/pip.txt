@@ -13,6 +13,7 @@ zeep
 xlrd
 xlsxwriter
 ptpython
+boto3
 -r https://raw.githubusercontent.com/OCA/l10n-spain/${ODOO_VERSION}/requirements.txt
 -r https://raw.githubusercontent.com/OCA/server-auth/${ODOO_VERSION}/requirements.txt
 -r https://raw.githubusercontent.com/OCA/server-backend/${ODOO_VERSION}/requirements.txt

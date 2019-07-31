@@ -1,16 +1,24 @@
+
 AGGREGATE=true
+DEPTH_DEFAULT="1"
+DEPTH_MERGE="100"
+DOODBA_ENVIRONMENT="prod"
 COMPILE=true
 PYTHONOPTIMIZE="2"
 CLEAN="2"
-DOODBA_ENVIRONMENT="prod"
-LIST_DB="false"
 PTVSD_ENABLE="0"
+PTVSD_ARGS="--host 0.0.0.0 --port 6899 --wait --multiprocess"
 PYTHONPATH="/opt/odoo/custom/src/odoo"
+
+
+EMAIL=""
+EMAIL_FROM=""
 
 # XXX Customize for your project
 # Odoo
 #ODOO_MAJOR=11
 #ODOO_MINOR=11.0
+#ODOO_VERSION=11.0
 #INITIAL_LANG=
 #ODOO_IMAGE=docker.io/myuser/myproject-odoo
 
@@ -22,9 +30,12 @@ DOMAIN_PROD=www.example.com
 DOMAIN_PROD_ALT=example.com
 
 # Database
+ADMIN_PASSWORD="admin"
 #DB_VERSION=10
 #DB_USER=odoo
 #DB_FILTER=.*
+DB_NAME="/odoo-11/db"
+LIST_DB="false"
 
 # Real SMTP relay
 SMTP_REAL_MAILNAME=example.com
