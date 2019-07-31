@@ -1,12 +1,1 @@
-python3-crypto
-python3-paramiko
-python3-gevent
-python3-lasso
-python3-tz
-python3-unidecode
-python3-requests
-python3-numpy
-python3-pandas
-uwsgi
-uwsgi-emperor
-uwsgi-plugin-python3
+
