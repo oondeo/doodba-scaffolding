@@ -13,6 +13,7 @@ if [ -z "$IMAGE_NAME" ]; then
     IMAGE_NAME="$DOCKER_REPO:$DOCKER_TAG"
 fi
 
+sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} $ODOO_VERSION/g" src/repos.yaml
 if [ "$DOCKER_TAG" == "8.0" ]
 then
     rm -f custom/conf.d/queue.conf
