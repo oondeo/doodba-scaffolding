@@ -31,7 +31,7 @@ docker build \
     --build-arg UID=1000 \
     --build-arg GID=1000 \
     --build-arg VCS_REF="$GIT_SHA1" \
-    --build-arg BUILD_DATE="$(date --rfc-3339 ns)" \    
+    --build-arg BUILD_DATE="$(date --rfc-3339 ns)" \
     --build-arg UMASK="002" \
     --build-arg AGGREGATE="true" \
     --build-arg INITIAL_LANG="es" \
