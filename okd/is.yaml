@@ -20,7 +20,7 @@ spec:
       version: "latest"
     from:
       kind: DockerImage
-      name: docker.io/oondeo/doodba:latest
+      name: docker.io/oondeo/odoo:latest
     importPolicy: {}
     name: "latest"
     referencePolicy:
@@ -35,7 +35,7 @@ spec:
       version: "11.0"
     from:
       kind: DockerImage
-      name: docker.io/oondeo/doodba:11.0
+      name: docker.io/oondeo/odoo:11.0
     importPolicy: {}
     name: "11.0"
     referencePolicy:
@@ -50,7 +50,7 @@ spec:
       version: "12.0"
     from:
       kind: DockerImage
-      name: docker.io/oondeo/doodba:12.0
+      name: docker.io/oondeo/odoo:12.0
     importPolicy: {}
     name: "12.0"
     referencePolicy:

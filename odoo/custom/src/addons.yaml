@@ -1,5 +1,5 @@
 ---
 ONLY:
-  LANG:
-    - 'es_ES.UTF-8'
+  INITIAL_LANG:
+    - 'es_ES'
 l10n-spain: ["*"]
