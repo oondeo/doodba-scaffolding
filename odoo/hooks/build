@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 echo "------ HOOK START - BUILD -------"
 printenv
@@ -13,7 +14,7 @@ if [ -z "$IMAGE_NAME" ]; then
     IMAGE_NAME="$DOCKER_REPO:$DOCKER_TAG"
 fi
 
-sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} $ODOO_VERSION/g" src/repos.yaml
+sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} $ODOO_VERSION/g" custom/src/repos.yaml
 if [ "$DOCKER_TAG" == "8.0" ]
 then
     rm -f custom/conf.d/queue.conf
@@ -39,7 +40,6 @@ docker build \
     --build-arg COMPILE="true" \
     --build-arg ODOO_VERSION=$version \
     --build-arg APPLICATION="${APPLICATION:-ocb}" \
-    ${BUILD_ARGS} \
-    -t $IMAGE_NAME .
+    ${BUILD_ARGS} -t $IMAGE_NAME .
 
 echo "------ HOOK END - BUILD -------"
