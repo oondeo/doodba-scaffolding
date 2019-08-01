@@ -27,13 +27,15 @@ ENV PATH=$HOME/.local/bin/:$PATH \
     PYTHONIOENCODING=UTF-8 \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
-    PIP_NO_CACHE_DIR=off
+    PIP_NO_CACHE_DIR=off \
+    WAIT_DB=false 
 
 ENV SUMMARY="Platform for building and running Odoo ${ODOO_VERSION} applications" \
     DESCRIPTION="Platform for building and running Odoo ${ODOO_VERSION} applications."
 
 
 RUN git clone --depth 1 https://github.com/OCA/maintainer-quality-tools.git /opt/maintainer-quality-tools  \
+    && sed -i "s/ 'install'/ 'install','--user'/" /opt/maintainer-quality-tools/travis/clone_oca_dependencies \
     && rm -rf /opt/maintainer-quality-tools/.git
 
 RUN mkdir -p /opt/addons /mnt/extra-addons 
@@ -48,4 +50,5 @@ RUN cp /usr/local/bin/odoo $STI_SCRIPTS_PATH/run
 USER $UID
 
 #ENTRYPOINT [ "/opt/odoo/common/entrypoint" ]
-#ENTRYPOINT [ "/entrypoint.sh" ]
+#CMD [ "/opt/odoo/common/entrypoint" ]
+#ENTRYPOINT [ "/bin/dash" ]
