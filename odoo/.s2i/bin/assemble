@@ -21,3 +21,7 @@ if [ "$COMPILE" = true ]; then
     log INFO Compiling all Python code in /opt/odoo
     python -m compileall -q /opt/odoo
 fi
+
+
+rm -rf /opt/odoo/auto/*
+mkdir -p /opt/odoo/auto/addons

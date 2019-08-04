@@ -38,13 +38,15 @@ RUN git clone --depth 1 https://github.com/OCA/maintainer-quality-tools.git /opt
     && sed -i "s/ 'install'/ 'install','--user'/" /opt/maintainer-quality-tools/travis/clone_oca_dependencies \
     && rm -rf /opt/maintainer-quality-tools/.git
 
+RUN rm -rf /opt/odoo/auto/* && mkdir -p /opt/odoo/auto/addons
 RUN mkdir -p /opt/addons /mnt/extra-addons 
 RUN usermod -g $GID odoo \
     && chown -R $UID:0 /var/lib/odoo /qa/artifacts /opt /mnt/extra-addons \
     && chmod -R g+w /opt /var/lib/odoo /qa/artifacts /mnt/extra-addons \
     && find /opt /var/lib/odoo /qa/artifacts /mnt/extra-addons -type d -exec chmod g+s {} \; && sync
 RUN chmod g+w /etc/passwd 
-COPY ./entrypoint.sh /
+#COPY ./entrypoint.sh /
+
 COPY .s2i/bin/ $STI_SCRIPTS_PATH
 RUN cp /usr/local/bin/odoo $STI_SCRIPTS_PATH/run
 USER $UID
