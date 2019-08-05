@@ -2,6 +2,7 @@
 
 set -e
 
+export GID=0
 shopt -s dotglob
 echo "---> Installing application source ..."
 # find /tmp
@@ -13,8 +14,11 @@ if [ "$AGGREGATE" = true ]; then
     autoaggregate
 fi
 
-# /opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
+/opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
 
+pip install --no-cache-dir --user -r /opt/odoo/custom/build.d/dependencies/pip.txt
+#"gem", "install", "--no-rdoc", "--no-ri", "--no-update-sources",
+#"npm", "install", "-g"
 #for requirements.txt in /opt/odoo: pip install --user -r requirements.txt
 
 if [ "$COMPILE" = true ]; then
@@ -22,6 +26,4 @@ if [ "$COMPILE" = true ]; then
     python -m compileall -q /opt/odoo
 fi
 
-
-rm -rf /opt/odoo/auto/*
-mkdir -p /opt/odoo/auto/addons
+rm -rf /opt/odoo/auto/odoo.conf /opt/odoo/auto/addons/*  ~/.npm /tmp/*

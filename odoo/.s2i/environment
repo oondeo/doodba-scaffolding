@@ -9,7 +9,7 @@ CLEAN="2"
 PTVSD_ENABLE="0"
 PTVSD_ARGS="--host 0.0.0.0 --port 6899 --wait --multiprocess"
 PYTHONPATH="/opt/odoo/custom/src/odoo"
-
+WITHOUT_DEMO="all"
 
 EMAIL=""
 EMAIL_FROM=""
@@ -22,7 +22,7 @@ EMAIL_FROM=""
 #INITIAL_LANG=
 #ODOO_IMAGE=docker.io/myuser/myproject-odoo
 
-ODOO_PROXY_MODE=true
+PROXY_MODE=true
 
 # Domains
 DOMAIN_TEST=test.example.com
@@ -32,9 +32,12 @@ DOMAIN_PROD_ALT=example.com
 # Database
 ADMIN_PASSWORD="admin"
 #DB_VERSION=10
-#DB_USER=odoo
+#PGUSER=odoo
+#PGPASSWORD=odoo
+#PGHOST=db
+#PGPORT=5436
 #DB_FILTER=.*
-DB_NAME="/odoo-11/db"
+PGDATABASE="oondeo.es"
 LIST_DB="false"
 
 # Real SMTP relay

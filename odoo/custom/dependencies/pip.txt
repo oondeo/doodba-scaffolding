@@ -14,8 +14,19 @@ xlrd
 xlsxwriter
 ptpython
 boto3
+simplejson
+Pygments
+# auth_signup_verify_email
+email_validator
+# auth_saml
+lasso
+# auth_totp
+pyotp
+# auth_u2f
+python-u2flib-server
+responses
 -r https://raw.githubusercontent.com/OCA/l10n-spain/${ODOO_VERSION}/requirements.txt
--r https://raw.githubusercontent.com/OCA/server-auth/${ODOO_VERSION}/requirements.txt
+#-r https://raw.githubusercontent.com/OCA/server-auth/${ODOO_VERSION}/requirements.txt
 -r https://raw.githubusercontent.com/OCA/server-backend/${ODOO_VERSION}/requirements.txt
 -r https://raw.githubusercontent.com/OCA/server-tools/${ODOO_VERSION}/requirements.txt
 -r https://raw.githubusercontent.com/OCA/web/${ODOO_VERSION}/requirements.txt
