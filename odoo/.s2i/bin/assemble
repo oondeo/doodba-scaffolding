@@ -16,7 +16,10 @@ fi
 
 /opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
 
-pip install --no-cache-dir --user -r /opt/odoo/custom/build.d/dependencies/pip.txt
+if [ -e /opt/odoo/custom/dependencies/pip.txt ]
+then
+    pip install --no-cache-dir --user -r /opt/odoo/custom/dependencies/pip.txt
+fi
 #"gem", "install", "--no-rdoc", "--no-ri", "--no-update-sources",
 #"npm", "install", "-g"
 #for requirements.txt in /opt/odoo: pip install --user -r requirements.txt
@@ -27,3 +30,4 @@ if [ "$COMPILE" = true ]; then
 fi
 
 rm -rf /opt/odoo/auto/odoo.conf /opt/odoo/auto/addons/*  ~/.npm /tmp/*
+chmod -R g+w /opt || true

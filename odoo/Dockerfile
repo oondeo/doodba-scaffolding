@@ -48,7 +48,7 @@ RUN rm -rf /opt/odoo/auto/* && mkdir -p /opt/odoo/auto/addons \
 #COPY ./entrypoint.sh /
 
 COPY .s2i/bin/ $STI_SCRIPTS_PATH
-RUN cp /usr/local/bin/odoo $STI_SCRIPTS_PATH/run
+RUN cp /usr/local/bin/odoo $STI_SCRIPTS_PATH/run && sed -i 's/^import os/import os;os.umask(0o002)/' /usr/local/bin/direxec
 USER $UID
 
 #ENTRYPOINT [ "/opt/odoo/common/entrypoint" ]

@@ -15,6 +15,7 @@ xlsxwriter
 ptpython
 boto3
 simplejson
+validate_email
 Pygments
 # auth_signup_verify_email
 email_validator
