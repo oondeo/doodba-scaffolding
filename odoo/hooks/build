@@ -20,7 +20,7 @@ then
     rm -f custom/conf.d/queue.conf
     rm -f custom/dependencies/*
     echo git+https://github.com/OCA/openupgradelib.git@master > custom/dependencies/pip.txt
-    rm -f custom/src/addons.yaml
+    echo "" > custom/src/addons.yaml
 fi
 # BUILD_ARGS=""
 # while IFS='=' read -r NAME VALUE ; do
