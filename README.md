@@ -21,3 +21,6 @@ RUN curl -sL "$MQT_URI" | tar -xz -C /opt/ \
     && ln -s /opt/maintainer-quality-tools-*/travis/clone_oca_dependencies /usr/bin \
     && ln -s /opt/maintainer-quality-tools-*/travis/getaddons.py /usr/bin/get_addons \
     && chmod +x /usr/bin/get_addons
+
+# test build
+DOCKER_REPO="oondeo" DOCKER_TAG="8.0" APPLICATION="openupgrade" hooks/build

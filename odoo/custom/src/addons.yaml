@@ -1,9 +1,8 @@
 ---
-# ONLY:
-#   ODOO_VERSION:
-#     - '10.0'
-#     - '11.0'
-#     - '12.0'
+ONLY:
+  ODOO_VERSION:
+    - '11.0'
+    - '12.0'
 server-ux: ["*"]
 social: ["*"]
 stock-logistics-barcode: ["*"]

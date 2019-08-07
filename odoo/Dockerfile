@@ -37,6 +37,8 @@ ENV SUMMARY="Platform for building and running Odoo ${ODOO_VERSION} applications
 RUN git clone --depth 1 https://github.com/OCA/maintainer-quality-tools.git /opt/maintainer-quality-tools  \
     && rm -rf /opt/maintainer-quality-tools/.git
 COPY clone_oca_dependencies /opt/maintainer-quality-tools/travis/
+RUN /opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
+
 RUN rm -rf /opt/odoo/auto/* && mkdir -p /opt/odoo/auto/addons \
     && mkdir -p /opt/addons /mnt/extra-addons \
     && usermod -g 0 odoo \
