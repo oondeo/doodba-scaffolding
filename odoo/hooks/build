@@ -15,11 +15,11 @@ if [ -z "$IMAGE_NAME" ]; then
 fi
 
 sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} \$ODOO_VERSION/g" custom/src/repos.yaml
-if [ "$DOCKER_TAG" == "8.0" ]
+if [ "$DOCKER_TAG" == "8.0" ] [ "$DOCKER_TAG" == "9.0" ]
 then
-    rm -f custom/conf.d/queue.conf
-    rm -f custom/dependencies/*
-    echo git+https://github.com/OCA/openupgradelib.git@master > custom/dependencies/pip.txt
+    rm -f  custom/conf.d/queue.conf
+    # rm -f custom/dependencies/*
+    # echo git+https://github.com/OCA/openupgradelib.git@master > custom/dependencies/pip.txt
     echo "" > custom/src/addons.yaml
 fi
 # BUILD_ARGS=""
