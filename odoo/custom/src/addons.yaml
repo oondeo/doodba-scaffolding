@@ -1,32 +1,32 @@
 ---
-ONLY:
-  ODOO_VERSION:
-    - '11.0'
-    - '12.0'
-server-ux: ["*"]
-social: ["*"]
-stock-logistics-barcode: ["*"]
-web: ["*"]
-website: ["*"]
-sale-workflow: ["*"]
+# ONLY:
+#   ODOO_VERSION:
+#     - '11.0'
+#     - '12.0'
 queue: ["*"]
 server-auth: ["*"]
-server-backend: ["*"]
-account-financial-reporting: ["*"]
-rest-framework: ["*"]
 connector: ["*"]
-contract: ["*"]
-crm: ["*"]
-e-commerce: ["*"]
-event: ["*"]
-hr: ["*"]
-partner-contact: ["*"]
-product-attribute: ["*"]
-purchase-workflow: ["*"]
-server-brand: ["*"]
-server-tools: ["*"]
----
-ONLY:
-  LANG:
-    - 'es_ES.UTF-8'
-l10n-spain: ["*"]
+# server-ux: ["*"]
+# social: ["*"]
+# stock-logistics-barcode: ["*"]
+# web: ["*"]
+# website: ["*"]
+# sale-workflow: ["*"]
+# server-backend: ["*"]
+# account-financial-reporting: ["*"]
+# rest-framework: ["*"]
+# contract: ["*"]
+# crm: ["*"]
+# e-commerce: ["*"]
+# event: ["*"]
+# hr: ["*"]
+# partner-contact: ["*"]
+# product-attribute: ["*"]
+# purchase-workflow: ["*"]
+# server-brand: ["*"]
+# server-tools: ["*"]
+# ---
+# ONLY:
+#   LANG:
+#     - 'es_ES.UTF-8'
+# l10n-spain: ["*"]
