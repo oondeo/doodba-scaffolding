@@ -49,7 +49,7 @@
 4	.vscode/tasks.json	/^                "--file=setup-devel.yaml",$/;"	s	array:tasks.1.args
 4	.vscode/tasks.json	/^                "--pull"$/;"	s	array:tasks.3.args
 4	.vscode/tasks.json	/^        {$/;"	o	array:tasks
-5	.vscode/extensions.json	/^        "PeterJausovec.vscode-docker",$/;"	s	array:recommendations
+5	.vscode/extensions.json	/^        "ms-azuretools.vscode-docker",$/;"	s	array:recommendations
 5	.vscode/tasks.json	/^                "run",$/;"	s	array:tasks.1.args
 5	.vscode/tasks.json	/^        {$/;"	o	array:tasks
 6	.vscode/extensions.json	/^        "qub.qub-xml-vscode",$/;"	s	array:recommendations
@@ -172,7 +172,7 @@ reveal	.vscode/tasks.json	/^                "reveal": "always",$/;"	s	object:tas
 run	odoo/clone_oca_dependencies	/^def run(deps_checkout_dir, build_dir):$/;"	f
 search.followSymlinks	.vscode/settings.json	/^    "search.followSymlinks": false,$/;"	b
 search.useIgnoreFiles	.vscode/settings.json	/^    "search.useIgnoreFiles": false,$/;"	b
-server_wide_modules	odoo/custom/conf.d/queue.conf	/^server_wide_modules = web,web_kanban_gauge,base_sparse_field,queue_job,connector$/;"	k	section:options
+server_wide_modules	odoo/custom/conf.d/queue.conf	/^server_wide_modules = web,web_kanban,web_kanban_gauge,base_sparse_field,queue_job,connector$/;"	k	section:options
 shell	.vscode/tasks.json	/^                "shell": {$/;"	o	object:tasks.1.options
 shell	.vscode/tasks.json	/^                "shell": {$/;"	o	object:tasks.3.options
 showReuseMessage	.vscode/tasks.json	/^                "showReuseMessage": false$/;"	b	object:tasks.0.presentation
