@@ -14,7 +14,7 @@ if [ "$AGGREGATE" = true ]; then
     autoaggregate
 fi
 
-/opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
+/opt/maintainer-quality-tools/travis/clone_oca_dependencies --user /opt/odoo/custom/src /opt/odoo/custom/src
 
 if [ -e /opt/odoo/custom/dependencies/pip.txt ]
 then

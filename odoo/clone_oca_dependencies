@@ -32,6 +32,7 @@ import logging
 
 
 _logger = logging.getLogger()
+PIP_ARGS = []
 
 
 def parse_depfile(depfile, owner='OCA'):
@@ -78,6 +79,8 @@ def run(deps_checkout_dir, build_dir):
         reqfilenames.append(osp.join(build_dir, 'requirements.txt'))
     for repo in os.listdir(deps_checkout_dir):
         _logger.info('examining %s', repo)
+        if os.path.basename(repo) == 'odoo':
+            continue
         processed.add(repo)
         depfilename = osp.join(deps_checkout_dir, repo, 'oca_dependencies.txt')
         dependencies.append(depfilename)
@@ -104,12 +107,15 @@ def run(deps_checkout_dir, build_dir):
             if new_dep_filename not in dependencies:
                 dependencies.append(new_dep_filename)
     for reqfilename in reqfilenames:
-        command = ['pip', 'install', '--user', '-r', reqfilename]
+        command = ['pip', 'install', *PIP_ARGS, '-r', reqfilename]
         _logger.info('Calling %s', ' '.join(command))
         subprocess.check_call(command)
 
 
 if __name__ == '__main__':
+    for arg in sys.argv:
+        if arg.startswith('-'):
+            PIP_ARGS.append(sys.argv.pop(1))
     if len(sys.argv) == 1:
         deps_checkout_dir = osp.join(os.environ['HOME'], 'dependencies')
         if not osp.exists(deps_checkout_dir):
