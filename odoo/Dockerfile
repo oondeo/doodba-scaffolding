@@ -1,5 +1,5 @@
 ARG ODOO_VERSION
-FROM tecnativa/doodba:${ODOO_VERSION}-onbuild
+FROM oondeo/doodba:${ODOO_VERSION}-onbuild
 
 USER root
 
