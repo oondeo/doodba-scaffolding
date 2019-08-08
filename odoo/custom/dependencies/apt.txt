@@ -1,3 +1,6 @@
+python3-pil
+python3-babel
+python3-jinja2
 python3-crypto
 python3-paramiko
 python3-gevent
