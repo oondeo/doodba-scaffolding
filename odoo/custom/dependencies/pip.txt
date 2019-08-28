@@ -5,6 +5,7 @@ num2words
 phonenumbers
 oauthlib
 redis
+pyinotify
 psycogreen
 psycogreen
 vobject
