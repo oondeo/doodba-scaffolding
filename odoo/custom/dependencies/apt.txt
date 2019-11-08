@@ -13,3 +13,4 @@ python3-pandas
 uwsgi
 uwsgi-emperor
 uwsgi-plugin-python3
+libxmlsec1-dev

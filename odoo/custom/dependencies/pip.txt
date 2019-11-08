@@ -6,7 +6,6 @@ phonenumbers
 oauthlib
 redis
 psycogreen
-psycogreen
 vobject
 qrcode
 zeep
