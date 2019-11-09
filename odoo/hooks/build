@@ -43,6 +43,7 @@ docker build \
     --build-arg CLEAN="true" \
     --build-arg COMPILE="true" \
     --build-arg ODOO_VERSION=$version \
+    --build-arg VERSION=$version \
     --build-arg APPLICATION="${APPLICATION:-ocb}" \
     ${BUILD_ARGS} -t $IMAGE_NAME .
 
