@@ -14,12 +14,12 @@ if [ "$AGGREGATE" = true ]; then
     autoaggregate
 fi
 
-/opt/maintainer-quality-tools/travis/clone_oca_dependencies --user /opt/odoo/custom/src /opt/odoo/custom/src
+# /opt/maintainer-quality-tools/travis/clone_oca_dependencies --user /opt/odoo/custom/src /opt/odoo/custom/src
 
-if [ -e /opt/odoo/custom/dependencies/pip.txt ]
-then
-    pip install --no-cache-dir --user -r /opt/odoo/custom/dependencies/pip.txt
-fi
+# if [ -e /opt/odoo/custom/dependencies/pip.txt ]
+# then
+#     pip install --no-cache-dir --user -r /opt/odoo/custom/dependencies/pip.txt
+# fi
 #"gem", "install", "--no-rdoc", "--no-ri", "--no-update-sources",
 #"npm", "install", "-g"
 #for requirements.txt in /opt/odoo: pip install --user -r requirements.txt
