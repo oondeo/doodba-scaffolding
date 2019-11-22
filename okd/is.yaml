@@ -54,4 +54,34 @@ spec:
     importPolicy: {}
     name: "12.0"
     referencePolicy:
-      type: Source      
+      type: Source
+  - annotations:
+      description: Odoo application.
+      iconClass: icon-python
+      openshift.io/display-name: odoo-11-oondeo
+      sampleRepo: https://github.com/oondeo/oondeo/doodba-scaffolding.git
+      supports: odoo:11,odoo
+      tags: builder,odoo
+      version: "11.0"
+    from:
+      kind: DockerImage
+      name: docker.io/oondeo/odoo:11.0-oondeo
+    importPolicy: {}
+    name: "11.0-oondeo"
+    referencePolicy:
+      type: Source
+  - annotations:
+      description: Odoo application.
+      iconClass: icon-python
+      openshift.io/display-name: odoo-12-oondeo
+      sampleRepo: https://github.com/oondeo/oondeo/doodba-scaffolding.git
+      supports: odoo:12.0,odoo
+      tags: builder,odoo
+      version: "12.0"
+    from:
+      kind: DockerImage
+      name: docker.io/oondeo/odoo:12.0-oondeo
+    importPolicy: {}
+    name: "12.0-oondeo"
+    referencePolicy:
+      type: Source

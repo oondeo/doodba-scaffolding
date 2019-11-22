@@ -269,6 +269,7 @@ objects:
             name: "${NAME}-data"
           - mountPath: "/opt/odoo/custom/conf.d"
             name: "odoo-config"
+            subPath: odoo.conf
           - mountPath: "/opt/odoo/auto/addons"
             name: "addons"
           resources:
