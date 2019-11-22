@@ -31,6 +31,7 @@ objects:
   data:
     odoo.conf: |
         [options]
+        running_env = prod
         ; log_handler = [':INFO','werkzeug:CRITICAL']
         ; log_level = debug
         ; log_db = False
@@ -146,8 +147,6 @@ objects:
               secretKeyRef:
                 key: database-password
                 name: "${NAME}"
-          - name: USER_NAME
-            value: oodo
           - name: UID
             value: "1001"
           - name: GID
@@ -194,6 +193,7 @@ objects:
             name: "${NAME}-data"
           - mountPath: "/opt/odoo/custom/conf.d"
             name: "odoo-config"
+            subPath: odoo.conf
           - mountPath: "/opt/odoo/auto/addons"
             name: "addons"
           resources:

@@ -7,7 +7,7 @@ docker-compose -f devel.yaml up
 
 # Initialize odoo database
 ```
-odoo --no-http -u all --load-language=es -d db
+odoo --no-http -u all --load-language=es_ES -d db
 ```
 
 # Todo
