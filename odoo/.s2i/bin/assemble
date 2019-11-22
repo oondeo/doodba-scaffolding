@@ -12,14 +12,15 @@ cp -a /tmp/src/odoo/custom/* "/opt/odoo/custom"
 # /opt/odoo/common/build && sync
 if [ "$AGGREGATE" = true ]; then
     autoaggregate
+# /opt/maintainer-quality-tools/travis/clone_oca_dependencies --user /opt/odoo/custom/src /opt/odoo/custom/src
+
+# if [ -e /opt/odoo/custom/dependencies/pip.txt ]
+# then
+#     pip install --no-cache-dir --user -r /opt/odoo/custom/dependencies/pip.txt
+# fi
 fi
 
-/opt/maintainer-quality-tools/travis/clone_oca_dependencies --user /opt/odoo/custom/src /opt/odoo/custom/src
 
-if [ -e /opt/odoo/custom/dependencies/pip.txt ]
-then
-    pip install --no-cache-dir --user -r /opt/odoo/custom/dependencies/pip.txt
-fi
 #"gem", "install", "--no-rdoc", "--no-ri", "--no-update-sources",
 #"npm", "install", "-g"
 #for requirements.txt in /opt/odoo: pip install --user -r requirements.txt
@@ -30,4 +31,5 @@ if [ "$COMPILE" = true ]; then
 fi
 
 rm -rf /opt/odoo/auto/odoo.conf /opt/odoo/auto/addons/*  ~/.npm /tmp/*
+chown -R $UID:$GID /opt || true
 chmod -R g+w /opt || true
