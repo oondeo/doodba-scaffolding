@@ -1,0 +1,6 @@
+#https://wei.github.io/pull/
+version: "1"
+rules:
+  - base: master
+    upstream: Tecnativa:doodba    # change `wei` to the owner of upstream repo
+    mergeMethod: merge
