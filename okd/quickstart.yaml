@@ -31,7 +31,6 @@ objects:
   data:
     odoo.conf: |
         [options]
-        running_env = prod
         ; log_handler = [':INFO','werkzeug:CRITICAL']
         ; log_level = debug
         ; log_db = False

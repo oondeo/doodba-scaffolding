@@ -1,5 +1,3 @@
-ARG ODOO_VERSION
-FROM oondeo/doodba:${ODOO_VERSION}-onbuild
 
 USER root
 
@@ -28,6 +26,7 @@ ENV PATH=$HOME/.local/bin/:$PATH \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     PIP_NO_CACHE_DIR=off \
+    ODOO_VERSION=${ODOO_VERSION} \
     VERSION=${ODOO_VERSION} \
     WAIT_DB=false
 

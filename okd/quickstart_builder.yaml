@@ -31,7 +31,6 @@ objects:
   data:
     odoo.conf: |
       [options]
-      running_env = prod
       ; data_dir = /var/lib/odoo
       ; log_handler = [':INFO','werkzeug:CRITICAL']
       ; admin_passwd = admin
