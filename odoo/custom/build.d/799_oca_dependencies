@@ -1,3 +1,0 @@
-#!/bin/bash
-
-/opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
