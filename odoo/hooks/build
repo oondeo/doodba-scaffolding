@@ -17,7 +17,7 @@ fi
 if [ -z "$IMAGE_NAME" ]; then
     IMAGE_NAME="$DOCKER_REPO:$DOCKER_TAG"
 fi
-sed -i "1iFROM ${PARENT_IMAGE}:${version}-onbuild" Dockerfile
+sed -i "s/^FROM.*/FROM ${PARENT_IMAGE}:${version}-onbuild/" Dockerfile
 sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} \$ODOO_VERSION/g" custom/src/repos.yaml
 if [ "$version" == "8.0" ] || [ "$version" == "9.0" ] || [ "$version" == "10.0" ]
 then

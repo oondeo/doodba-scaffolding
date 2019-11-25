@@ -1,0 +1,3 @@
+#!/bin/sh
+
+../../clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src

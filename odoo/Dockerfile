@@ -1,3 +1,4 @@
+FROM oondeo/doodba
 
 USER root
 
@@ -28,7 +29,9 @@ ENV PATH=$HOME/.local/bin/:$PATH \
     PIP_NO_CACHE_DIR=off \
     ODOO_VERSION=${ODOO_VERSION} \
     VERSION=${ODOO_VERSION} \
-    WAIT_DB=false
+    WAIT_DB=false \
+    UID=$UID \
+    GID=$GID
 
 ENV SUMMARY="Platform for building and running Odoo ${ODOO_VERSION} applications" \
     DESCRIPTION="Platform for building and running Odoo ${ODOO_VERSION} applications."
