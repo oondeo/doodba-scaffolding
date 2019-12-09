@@ -30,7 +30,7 @@ ENV PATH=$HOME/.local/bin/:$PATH \
     ODOO_VERSION=${ODOO_VERSION} \
     VERSION=${ODOO_VERSION} \
     WAIT_DB=false \
-    UID=1000s \
+    UID=1000 \
     GID=0
 
 ENV SUMMARY="Platform for building and running Odoo ${ODOO_VERSION} applications" \
