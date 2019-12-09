@@ -28,7 +28,9 @@ ENV PATH=$HOME/.local/bin/:$PATH \
     PIP_NO_CACHE_DIR=off \
     ODOO_VERSION=${ODOO_VERSION} \
     VERSION=${ODOO_VERSION} \
-    WAIT_DB=false
+    WAIT_DB=false \
+    UID=1000 \
+    GID=0
 
 ENV SUMMARY="Platform for building and running Odoo ${ODOO_VERSION} applications" \
     DESCRIPTION="Platform for building and running Odoo ${ODOO_VERSION} applications."
@@ -46,11 +48,12 @@ RUN /opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom
 
 #Fix odoo 9 build
 RUN pip install --upgrade pytz
+RUN python -m compileall /opt/odoo/src
 
 RUN rm -rf /opt/odoo/auto/* && mkdir -p /opt/odoo/auto/addons \
     && mkdir -p /opt/addons /mnt/extra-addons \
-    && usermod -g 0 odoo \
-    && chown -R $UID:0 /var/lib/odoo /qa/artifacts /opt /mnt/extra-addons \
+    && usermod -g $GID odoo \
+    && chown -R $UID:$GID /var/lib/odoo /qa/artifacts /opt /mnt/extra-addons \
     && chmod -R g+w /opt /var/lib/odoo /qa/artifacts /mnt/extra-addons \
     && chmod g+w /etc/passwd  \
     && find /opt /var/lib/odoo /qa/artifacts /mnt/extra-addons -type d -exec chmod g+s {} \; && sync
