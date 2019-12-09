@@ -6,7 +6,7 @@ set -ex
 echo "------ HOOK START - BUILD -------"
 printenv
 
-PARENT_IMAGE="oondeo/doodba"
+PARENT_IMAGE="Tecnativa/doodba"
 # Get Odoo version
 arrIN=(${DOCKER_TAG//-/ })
 version="${arrIN[0]}"
@@ -36,7 +36,6 @@ fi
 echo "BUILD_ARGS=$BUILD_ARGS"
 docker build \
     --build-arg UID=1000 \
-    --build-arg GID=0 \
     --build-arg VCS_REF="$GIT_SHA1" \
     --build-arg BUILD_DATE="$(date --rfc-3339 ns)" \
     --build-arg UMASK="002" \
