@@ -1,9 +1,9 @@
 #!/usr/bin/env sh
 
 echo "------ HOOK START - POST_CHECKOUT -------"
-printenv
+git submodule update --init --recursive
 if [ "$BUILD_DIR" != "" ]
 then
-    cp -a "$(dirname $0)/$BUILD_DIR/hooks" "$(dirname $0)../"
+    cp -a "$(dirname $0)/$BUILD_DIR" "$(dirname $0)/../../"
 fi
 echo "------ HOOK END - POST_CHECKOUT -------"

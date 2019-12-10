@@ -5,10 +5,6 @@ set -ex
 
 echo "------ HOOK START - BUILD -------"
 printenv
-if [ "$BUILD_DIR" != "" ]
-then
-    cd "$(dirname $0)/$BUILD_DIR"
-fi
 
 PARENT_IMAGE="Tecnativa/doodba"
 # Get Odoo version
