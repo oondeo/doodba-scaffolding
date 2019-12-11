@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 echo "------ HOOK START - POST_CHECKOUT -------"
-git submodule update --init --recursive
+git submodule update --init --recursive --remote
+# git submodule foreach git pull origin master
 if [ "$BUILD_DIR" != "" ]
 then
     cp -a "$(dirname $0)/$BUILD_DIR" "$(dirname $0)/../../"
