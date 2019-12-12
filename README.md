@@ -21,6 +21,7 @@ docker-compose -f devel.yaml up
 ```
 SELECT c.relname FROM pg_class c WHERE c.relkind = 'S';
 ```
+- https://github.com/OCA/maintainer-tools/blob/3f6cc99722169fd9f2452c07bdd34b6e216ee50f/tools/repos_with_ids.txt
 
 # test build
 ```

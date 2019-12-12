@@ -5,6 +5,7 @@
 #     - '12.0'
 queue: ["*"]
 connector: ["*"]
+storage: ["*"]
 # server-auth: ["*"]
 # server-ux: ["*"]
 # social: ["*"]

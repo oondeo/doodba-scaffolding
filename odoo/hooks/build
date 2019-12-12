@@ -20,18 +20,24 @@ fi
 sed -i '/^FROM.*tecnativa.doodba/d' Dockerfile
 sed -i "1iFROM ${PARENT_IMAGE}:${version}-onbuild" Dockerfile
 sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} \$ODOO_VERSION/g" custom/src/repos.yaml
+if [ "$version" != "12.0" ] && [ "$version" != "13.0" ]
+then
+    sed -i '/^brand\:/d' custom/src/addons.yaml
+    sed -i '/^search-engine\:/d' custom/src/addons.yaml
+    sed -i '/^storage\:/d' custom/src/addons.yaml
+fi
 if [ "$version" == "8.0" ] || [ "$version" == "9.0" ] || [ "$version" == "10.0" ]
 then
     rm -f  custom/conf.d/queue.conf
-    # rm -f custom/dependencies/*
-    # echo git+https://github.com/OCA/openupgradelib.git@master > custom/dependencies/pip.txt
-    echo "python-imaging"  > custom/dependencies/apt.txt
-    echo "python-pyinotify"  >> custom/dependencies/apt.txt
-    echo "python-babel"  >> custom/dependencies/apt.txt
-    echo "python-jinja2"  >> custom/dependencies/apt.txt
+    sed -i '/^storage\:/d' custom/src/addons.yaml
+    sed -i '/^pos/d' custom/src/addons.yaml
+    sed -i '/^connector/d' custom/src/addons.yaml
+    sed -i '/^queue\:/d' custom/src/addons.yaml
+    sed -i '/^server-backend\:/d' custom/src/addons.yaml
+    sed -i '/^server-brand\:/d' custom/src/addons.yaml
+    sed -i '/^server-env\:/d' custom/src/addons.yaml
     echo "" > custom/src/addons.yaml
 fi
-
 
 echo "BUILD_ARGS=$BUILD_ARGS"
 docker build \
