@@ -1,4 +1,4 @@
-FROM Tecnativa/doodba
+FROM tecnativa/doodba
 
 USER root
 
