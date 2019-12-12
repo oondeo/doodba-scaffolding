@@ -1,0 +1,52 @@
+#!/bin/bash
+set -ex
+##DOCKER_REPO="oondeo" DOCKER_TAG="8.0" APPLICATION="openupgrade" hooks/build
+
+
+echo "------ HOOK START - BUILD -------"
+printenv
+
+PARENT_IMAGE="tecnativa/doodba"
+# Get Odoo version
+arrIN=(${DOCKER_TAG//-/ })
+version="${arrIN[0]}"
+if [ "$version" == latest ]; then
+    version=${LATEST_VERSION:-"12.0"}
+fi
+
+if [ -z "$IMAGE_NAME" ]; then
+    IMAGE_NAME="$DOCKER_REPO:$DOCKER_TAG"
+fi
+sed -i '/^FROM.*tecnativa.doodba/d' Dockerfile
+sed -i "1iFROM ${PARENT_IMAGE}:${version}-onbuild" Dockerfile
+sed -i "s/ocb \$ODOO_VERSION/${APPLICATION:-ocb} \$ODOO_VERSION/g" custom/src/repos.yaml
+if [ "$version" == "8.0" ] || [ "$version" == "9.0" ] || [ "$version" == "10.0" ]
+then
+    rm -f  custom/conf.d/queue.conf
+    # rm -f custom/dependencies/*
+    # echo git+https://github.com/OCA/openupgradelib.git@master > custom/dependencies/pip.txt
+    echo "python-imaging"  > custom/dependencies/apt.txt
+    echo "python-pyinotify"  >> custom/dependencies/apt.txt
+    echo "python-babel"  >> custom/dependencies/apt.txt
+    echo "python-jinja2"  >> custom/dependencies/apt.txt
+    echo "" > custom/src/addons.yaml
+fi
+
+
+echo "BUILD_ARGS=$BUILD_ARGS"
+docker build \
+    --build-arg UID=1000 \
+    --build-arg VCS_REF="$GIT_SHA1" \
+    --build-arg BUILD_DATE="$(date --rfc-3339 ns)" \
+    --build-arg UMASK="002" \
+    --build-arg AGGREGATE="true" \
+    --build-arg INITIAL_LANG="es" \
+    --build-arg PYTHONOPTIMIZE="2" \
+    --build-arg CLEAN="true" \
+    --build-arg COMPILE="true" \
+    --build-arg ODOO_VERSION=$version \
+    --build-arg VERSION=$version \
+    --build-arg APPLICATION="${APPLICATION:-ocb}" \
+    ${BUILD_ARGS} -t $IMAGE_NAME .
+
+echo "------ HOOK END - BUILD -------"
