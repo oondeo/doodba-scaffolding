@@ -12,7 +12,7 @@ message: |-
   For more information about using this template, including OpenShift considerations, see https://github.com/oondeo/odoo-docker.git.
 metadata:
   annotations:
-    description: A deployment of odoo .
+    description: A deployment of odoo builder.
     iconClass: icon-python
     openshift.io/display-name: Odoo ERP
     openshift.io/documentation-url: https://doc.odoo.com/
@@ -30,48 +30,35 @@ objects:
     name: "${NAME}"
   data:
     odoo.conf: |
-      [options]
-      data_dir = /var/lib/odoo
-      log_handler = [':INFO','werkzeug:CRITICAL']
-      ; admin_passwd = admin
-      ; csv_internal_sep = ,
-      ; db_maxconn = 64
-      ; db_name = False
-      ; db_template = template1
-      ; dbfilter = .*
-      ; debug_mode = False
-      ; email_from = False
-      ; limit_memory_hard = 2684354560
-      ; limit_memory_soft = 2147483648
-      ; limit_request = 8192
-      ; limit_time_cpu = 60
-      ; limit_time_real = 120
-      ; list_db = True
-      ; log_db = False
-      ; log_handler = [':INFO']
-      ; log_level = info
-      ; logfile = None
-      ; longpolling_port = 8072
-      ; max_cron_threads = 2
-      ; osv_memory_age_limit = 1.0
-      ; osv_memory_count_limit = False
-      ; smtp_password = False
-      ; smtp_port = 25
-      ; smtp_server = localhost
-      ; smtp_ssl = False
-      ; smtp_user = False
-      ; workers = 0
-      ; xmlrpc = True
-      ; xmlrpc_interface =
-      ; xmlrpc_port = 8069
-      ; xmlrpcs = True
-      ; xmlrpcs_interface =
-      ; xmlrpcs_port = 8071
-- apiVersion: v1
-  data:
-    ssh-privatekey: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlKS0FJQkFBS0NBZ0VBdk5DaWFWNlpSUThOdUV2ZHMxQ2UzYWYzV2pzT1VhUHBZbXdvV3NvVkl3eUw1N282CnBhdVlRSkMvdUhtRFZoSFVaNFNNTTczUUVLWnQ5Zi9LNnhVZ2RhZjYrOGZoYnlaajVrdDdHNFlrMjB5cVZWSHcKL1FETEtwUFFIN0Fod1ZIb3ZQMFJqS2NhOEhNVVBaOE5PYzArNldzRHhxWkpidUtnVWJENEllSFpGUU5JMldIQwpCUk9pSkpYbEx4SDR6cXBZSllId0Q0dFRUaFFTZnR0STNoa243eks3WmRJV2FHSXBPR2o2SG9tWDJJdWlmcXBYCnoyYTVqSCt5L0dUaStYN1lrOVJyQi9wdW5wMlhrUDd3WWtWbkdsek9jS3daS3NvUCtzZXoyci9Ia2ZSdDdKSmMKdENzMUtuRnkyNm9SVHl4N2RHSUpZVjhGdk9qL1NsVUk3bkxHdi9QRUpKbUFFVVZmd2daZE8zSTFXUXlNZ0NsNgp5b0Y3dHhOZm01d1RGUXJkQnJjdnVzWWVoS1QrSThRM1owKzhHOHNpYVUzYXdCQVpWVnhjVFlvTVpsYXFxNzhPClZzS0tXMEVRdDRjZSsyaTljVTdpTnZsZVF6Yi9hRzdNazZLV0ZKQWZGMUxFdENxZ055M3FIZGZaMzVQRlFEUFIKNm4xRTZWblVGdXlGVkc2eUoza282ZVRYbFhWUDFTL0hWSWNzaC9NalpWeEdabC9OZFplZmFKYUJ4MFpDMHBOTwo2ZGZDNTcvekZya3RyV2NZRGMvVmJVUW9yVk9jVWxZS0pQS1hhYlAwMVAwYmtNOHZSUTB6OStrbGthdjk2QXJ5Ci80ajJlVklmVUQ4RndqNDAvZHNodHlKV2lkM0NJMkJ4SVNidHJ1MXZEeUhmb0xyNFBVUG5kc0pIY1Q4Q0F3RUEKQVFLQ0FnQTVnNmZsUnQ2VExhbTFPTTdZZnpkVk40UGVKVjBRTzBpdEpWc0poTUw1Z1NuZ3RWYUYvb1lMTE14cApxZ0g2cHNXM25xV0NZVkJPc2hPT3VwTWFGcjVqZUg2NFVVTjNNdzk5S0FMZytIU2pwRy9DTzRxWDFyVU1UQ2c2CmJ0RnBiTVRqUkljaS9BZjF0R2cyK1FyelQzVFpiektnUVNqZk1RTTZ2eGhtWWNCWmFUMjRrZEdpOEQ4VXUrQXEKL1dOM3VHWFBUd3hMLzltcFQrM3VYR2VPMThUVlZQUEdhVDlRSG82RjAxeFZEdjZGQk12RG42bk4wSEcydlhOTQo5SUk3RTR0dlJHWXg4UFBmTnd2aksvVVhTaUxFNGY0MFRnZ0FnN3BvWG9xSG1LRjI4U2pHeGpLYzR3aDMzRVRyCmFwdUpMWGlSbEFkZGRLOXZ3dDE0eS94RGZnelNCNzdkWDhyUmZkd0hydmhqZ0VhbzMrVmxTc0JzdkRyamZRcFAKcFc4Z3dwQTRTYS9IVk1JdjhQYlhjc2QwMWhCWm1kR1FwNFl5TndmbFBGVjBPQ2owZWszeFFnVWVhNHdtTzdxRApObW56TjZKWjB1ZGNZTUJia3QyUy9CUGRkZUEySk12enlVUmwrRUFHb2RwdFVNVlpicUFCNHZWS01oa0tHNldhCkFvOUdmY1ZudjVXZktjWGhLNGVUZnFtVWVKQjQyL3BuTmpnVHdNRzB3VVFEUlNiMXZTMWlkTm1lbFZCNFRuSmgKWExjUUEyVnRZNE94d25CbHpaN0VpdlRiMVZQVkNObCt4YjFGdFBxTmJMdFhGOU4rZEpROUdiTXhFYzVxYVl4ZwpCUHRoK09YMEN1MStNL2h2NUZ6d2dkS0phMnlPNU4xakdQaDlqbVlyQ3ZEUEtJdEFRUUtDQVFFQTMwK0dSRWlYCmJWTzRBdm9SaEhXY0ZsNE1CTTZQOFhDblVwa0dRVWR3bDBiM2dUQVgxdDJYYUd2MzBXcmNTOXVIT0VzTWd1UHoKUDNpU0RYTCtZR2ZFdmNKeFZTbUxxS2RqZ2MxMldrZ2wxRHB4TmdUaWNhcmFuL0FGMEpLNHRPWWFlclJkR0I5aQpxMG4xTkJwcWxESFBWZC92Z2YwOVcydWtOdnlLR29qOEhLUS9EME81OHJSeEI1a1N4N2QvTEVLSnlyWUQzbWZSCi8rUHVOdy9yTkVOUUkxd0xUdm5paERRRjdISjJKMmNzSjh3VUxYSjByR1lhZzNNTy9iL2VDUmMrVVltM1B5QU0KVktJY1Q0YXhZWUZZdFI1cmwzYmQrZi82bUk1cDNGV3VEZDF6ankyZ0NjSnFOV2pYUzJlWlo3YjMyQy9odXBUNwpzQVZGdUNXdlVoRlUzd0tDQVFFQTJIUm1JWUpNZWt5RnpQWnBuWmxBa0h4aGpBWFZycy9veUZ0cmFWcHg1RHJpCmVGeEpvdGZkcEJtRlVtTmt0NEoxWWxiOXJabUN4SkovNE0rVDV4eURGaG1LZjQrY3o4ODQxNGRKQXVxV2FuRlAKZ3R6MFp1bjRKaGdSblhWZ1FwSmtia0lvbGxWQnZkYi9JSmJxSmJSZklqZHVpVENyOWRXdFFZVWk2MzBMRWQ5MwpiSWcrZ2krRWxxTTl5eFh2a0tJaTAvZUQrc0dJd2l5dUd1NUFEd0NVV05ZalRMNVlKSEZ1VDZjbThyRVJMTUxHCjRQY2V1cFpYWTBTQzZtWUVkUW8yVThFTmhHQzBLcnUwUHg5ZTFDUHE1SUFpRHJaYWoxZGpaZUdSRTllblNVSm8KVUxyWDY1K05KaTFuTzZsbWlMTkxKekpHOU9Jemw3dEJTelJINDVnUG9RS0NBUUJKdXJIei9adXhod0NzU3ZCWgpzWk1WZDN1MFlwYjMrbC9rVDQzWEk4VXl6VVdPcTloVEl0cUlxWTBxNFlOV3NHYVcyWUNKL3NVallhV25OeDV4CnFoRTFMZXZKV0d3NkJQby9zeHl1ZGorM01JeU1iMVJzZnlLcng4M0RyWTI2ZkhhbHFNTkw0YURzT1FEeWNQNWIKYTQ2dkpiNm9SbnBwb3NLWFBRNUQ4Sko4eW1YZm5sYllvV2JvUVV3SUVMZTJYMG1yV2lrdzEwcG9tRkxnYnlzVApHRjV2TGthMWpwK1JVclBaKzNpelRjY3daSnNNM2t0VFdHck1sOEtOV1RudituS2k3VHRKWmtWcjlCSXcxNkhkCk5aMmFQeTc2MVU0NDZxRk1tVWl1Yk1PSTVHTHhGUGxQLzVhZGg3MzlzWGplMjNROU5xSHF2cUhTM2dyRTMveGcKdGtRMUFvSUJBQ3h4T2NjSGljeFNpZVpiY2JQNkUxZVhNakFkd3BIeC9rbWsrNWpXQ1N4aktyeXJ0akxKUDZqQgoxSzNsMm5nVFFTYS8xYllmSHNwZGlnUU9tcitKQ3lFdWZWRlRtMDdQclV3VGF0bytjRVBLb0JpdVpULzhLZ2NvClNmV2FjL2szTllldDdjZHdHZDl3bFZHTHF1ZXk4UldGYkJ5ZThhKzMvNnJFT3pjK3BWYzJHcjhkK2plZ3FnaUQKMjl3bTFObE5jUGswaU5TamlBRFdTNmtiNGVzeW8wTGFOTVU5RDd2cnprcHNkNEs4K0ZuSVpDMHNrQktmYTdIbQpEenN4Vnhqd3o5YkNmSlFCaHZ4L0xiTUlMZUJBdjZuSzVUTkFIYmZ3cVdmeHVHZnFqMTVyVkIrL1BUWVR2RmRxCld4ZlU0RWlSQjQwMHRYenlOTVdpblBWajlwNjBTZ0VDZ2dFQkFNeEl4WWhxblpiUExoZjk4SERUU21Cbis3dkUKejJlNFpyOVUzTTNSZXl4MU82ZFN5cGNROFI2RmkwMFZRR3JvaFdTYS9DRVEwMHVtL2I0cnY5K3BLWWR0WkhuSApDMGJNenVUZVJFUVJPOUs4dmJqTzQ0SCtKR3Flem42ZjM5czdsZlRPTExGd293NHVQdzIvYnBHU0o5RUN0U1pVCjVSOVB0c0NzTWFPQ2thYm0zZWVDZm1LeWtkTXFCaWw3dW1GWjJVR0tHUlJ1cm5LdG5TZ0VGdmMvdS9MaVM2NzYKbWJhaHN6T3hlSk9jQi9KcHJUVWhUMHRLUzhZcFkyUDRCdmpUSGpnV2tyY3g5YjRGcEN5UHpNdEIzTEsyWmNIagpuWmJxejZBVnBhYng5UENiazB4Z0pwTWRCdE5rcmIrcElwWnJCMS80MGFOeDRKTVJPLzdOWEc2b2t5Zz0KLS0tLS1FTkQgUlNBIFBSSVZBVEUgS0VZLS0tLS0K
-  kind: Secret
-  type: kubernetes.io/ssh-auth
+        [options]
+        ; log_handler = [':INFO','werkzeug:CRITICAL']
+        ; log_level = debug
+        ; log_db = False
+        ; logfile = None
+        ; debug_mode = False
+        ; csv_internal_sep = ,
+        ; db_maxconn = 64
+        ; db_template = template1
+        ; limit_memory_hard = 2684354560
+        ; limit_memory_soft = 2147483648
+        ; limit_request = 8192
+        ; limit_time_cpu = 60
+        ; limit_time_real = 120
+        ; max_cron_threads = 2
+        ; osv_memory_age_limit = 1.0
+        ; osv_memory_count_limit = False
+        ; smtp_password = False
+        ; smtp_port = 25
+        ; smtp_server = localhost
+        ; smtp_ssl = False
+        ; smtp_user = False
+        ; workers = 0
+        ; xmlrpc = True
+        ; xmlrpc_interface =
+        ; xmlrpc_port = 8069
+        ; xmlrpcs = True
+        ; xmlrpcs_interface =
+        ; xmlrpcs_port = 8071
 - apiVersion: v1
   kind: Secret
   metadata:
@@ -94,9 +81,9 @@ objects:
       targetPort: 8069
     - name: chat
       port: 8072
-      targetPort: 8072     
+      targetPort: 8072
     selector:
-      name: "${NAME}"  
+      name: "${NAME}"
 - apiVersion: v1
   kind: Route
   metadata:
@@ -104,10 +91,10 @@ objects:
   spec:
     host: "${APPLICATION_DOMAIN}"
     port:
-      targetPort: web    
+      targetPort: web
     tls:
       insecureEdgeTerminationPolicy: Redirect
-      termination: edge    
+      termination: edge
     to:
       kind: Service
       name: "${NAME}"
@@ -119,77 +106,13 @@ objects:
     host: "${APPLICATION_DOMAIN}"
     path: /longpolling
     port:
-      targetPort: chat    
+      targetPort: chat
     tls:
       insecureEdgeTerminationPolicy: Redirect
-      termination: edge    
+      termination: edge
     to:
       kind: Service
-      name: "${NAME}"      
-- apiVersion: "v1"
-  kind: "BuildConfig"
-  metadata:
-    name: "${NAME}"
-  spec:
-    output:
-      to:
-        kind: "ImageStreamTag"
-        name: "${NAME}:latest"  
-    source:
-      type: Git
-      git:
-        uri: ${SOURCE_REPOSITORY_URL}
-        ref: ${SOURCE_REPOSITORY_REF} 
-      contextDir: "odoo" 
-      #dockerfile: ""
-    strategy:
-      dockerStrategy:
-        dockerfilePath: Dockerfile.${IMAGE_VERSION}
-        from:
-          kind: "ImageStreamTag"
-          name: "doodba:${IMAGE_VERSION}-onbuild"
-          namespace: ${NAMESPACE}
-        # scripts: "http://somehost.com/scripts_directory"
-        # incremental: true 
-        env:
-        - name: USER_NAME
-          value: oodo
-        - name: UID
-          value: "1001"
-        - name: GID
-          value: "1001"
-        - name: UMASK
-          value: "000"
-        - name: AGGREGATE
-          value: "true"
-        - name: DEPTH_DEFAULT
-          value: "100"
-        - name: ODOO_VERSION
-          value: ${IMAGE_VERSION}
-        - name: PYTHONOPTIMIZE
-          value: "2"
-        - name: PIP_INSTALL_ODOO
-          value: "true"
-        - name: CLEAN
-          value: "true"
-        - name: COMPILE
-          value: "true"
-        - name: DOODBA_ENVIRONMENT
-          value: "prod"
-        - name: LIST_DB
-          value: "false"
-        - name: LOG_LEVEL
-          value: "DEBUG"          
-        - name: PTVSD_ENABLE
-          value: "0"
-        - name: PGDATABASE
-          value: ${DATABASE_NAME}
-        - name: PYTHONPATH
-          value: /opt/odoo/custom/src/odoo
-        - name: INITIAL_LANG
-          value: es
-        - name: SMTP_SERVER
-          value: smtplocal       
+      name: "${NAME}"
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
@@ -224,7 +147,7 @@ objects:
                 key: database-password
                 name: "${NAME}"
           - name: USER_NAME
-            value: oodo                
+            value: oodo
           - name: UID
             value: "1001"
           - name: GID
@@ -249,8 +172,10 @@ objects:
             value: "prod"
           - name: LIST_DB
             value: "false"
+          - name: PROXY_MODE
+            value: "true"
           - name: LOG_LEVEL
-            value: "WARNING"
+            value: "DEBUG"
           - name: PTVSD_ENABLE
             value: "0"
           - name: PYTHONPATH
@@ -258,7 +183,7 @@ objects:
           - name: INITIAL_LANG
             value: es
           - name: SMTP_SERVER
-            value: smtplocal                   
+            value: smtplocal
           image: " "
           name: odoo
           # args:
@@ -267,18 +192,23 @@ objects:
           volumeMounts:
           - mountPath: "/var/lib/odoo"
             name: "${NAME}-data"
-          - mountPath: "/etc/odoo"
+          - mountPath: "/opt/odoo/custom/conf.d"
             name: "odoo-config"
+            subPath: odoo.conf
+          - mountPath: "/opt/odoo/auto/addons"
+            name: "addons"
           resources:
             limits:
               memory: "${MEMORY_LIMIT}"
         volumes:
+        - name: addons
+          emptyDir: {}
         - name: "${NAME}-data"
           persistentVolumeClaim:
             claimName: "${NAME}"
         - name: "odoo-config"
           configMap:
-            name: "${NAME}"          
+            name: "${NAME}"
     triggers:
     - imageChangeParams:
         automatic: true
@@ -286,8 +216,8 @@ objects:
         - odoo
         from:
           kind: ImageStreamTag
-          name: "${NAME}:latest"
-          # namespace: "${NAMESPACE}"
+          name: "odoo:${IMAGE_VERSION}"
+          namespace: "${NAMESPACE}"
       type: ImageChange
     - type: ConfigChange
 - apiVersion: v1
@@ -300,10 +230,10 @@ objects:
     storageClassName: local-storage
     selector:
       matchLabels:
-        name: "${NAME}"         
+        name: "${NAME}"
     resources:
       requests:
-        storage: "${VOLUME_CAPACITY}"        
+        storage: "${VOLUME_CAPACITY}"
 parameters:
 - description: The name assigned to all of the frontend objects defined in this template.
   displayName: Name
@@ -319,7 +249,7 @@ parameters:
   displayName: Odoo Version
   name: IMAGE_VERSION
   required: true
-  value: '11.0'
+  value: '12.0'
 - description: Maximum amount of memory container can use.
   displayName: Memory Limit
   name: MEMORY_LIMIT
@@ -330,32 +260,16 @@ parameters:
   name: VOLUME_CAPACITY
   required: true
   value: 12Gi
-- description: The URL of the repository with your application source code.
-  displayName: Git Repository URL
-  name: SOURCE_REPOSITORY_URL
-  required: true
-  value: https://github.com/oondeo/doodba-scaffolding
-- description: Set this to a branch name, tag or other ref of your repository if you
-    are not using the default branch.
-  displayName: Git Reference
-  name: SOURCE_REPOSITORY_REF
-  value: master
-- description: The exposed hostname that will route to the CakePHP service, if left
+- description: The exposed hostname that will route to the Odoo service, if left
     blank a value will be defaulted.
   displayName: Application Hostname
   name: APPLICATION_DOMAIN
   value: ''
-- description: Github trigger secret.  A difficult to guess string encoded as part
-    of the webhook URL.  Not encrypted.
-  displayName: GitHub Webhook Secret
-  from: "[a-zA-Z0-9]{40}"
-  generate: expression
-  name: GITHUB_WEBHOOK_SECRET
 - displayName: Database Service Name
   name: DATABASE_SERVICE_NAME
   required: true
   value: postgresql.oondeo
-- description: 'Database engine: postgresql, mysql or sqlite (default).'
+- description: 'Database engine: postgresql, mysql or sqlite.'
   displayName: Database Engine
   name: DATABASE_ENGINE
   required: true

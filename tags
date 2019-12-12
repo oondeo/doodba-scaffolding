@@ -55,19 +55,22 @@
 6	.vscode/extensions.json	/^        "qub.qub-xml-vscode",$/;"	s	array:recommendations
 6	.vscode/tasks.json	/^                "--rm",$/;"	s	array:tasks.1.args
 6	.vscode/tasks.json	/^        {$/;"	o	array:tasks
-7	.vscode/extensions.json	/^        "robinbentley.sass-indented",$/;"	s	array:recommendations
+7	.vscode/extensions.json	/^        "syler.sass-indented",$/;"	s	array:recommendations
 7	.vscode/tasks.json	/^                "odoo"$/;"	s	array:tasks.1.args
 7	.vscode/tasks.json	/^        {$/;"	o	array:tasks
 CONFIGS	.vscode/doodbasetup.py	/^CONFIGS = PYLINT_CONFIGS + ($/;"	v
-DB_ARGS=	odoo/entrypoint.sh	/^DB_ARGS=()$/;"	f
 DEST	.vscode/doodbasetup.py	/^DEST = path.join(path.dirname(__file__), "doodba")$/;"	v
 DOODBA_PTVSD_ENABLE	.vscode/tasks.json	/^                    "DOODBA_PTVSD_ENABLE": "1"$/;"	s	object:tasks.5.options.env
 Dockerized Odoo project scaffolding	README.md	/^# Dockerized Odoo project scaffolding$/;"	c
-ENV_FILE	.vscode/doodbasetup.py	/^ENV_FILE = path.join(DEST, "..", "..", ".env")$/;"	v
-EXTRA_ARGS=	odoo/entrypoint.sh	/^EXTRA_ARGS=()$/;"	f
+ENV_FILE	.vscode/doodbasetup.py	/^ENV_FILE = path.join(ROOT, ".env")$/;"	v
+PIP_ARGS	odoo/clone_oca_dependencies	/^PIP_ARGS = []$/;"	v
 PYLINT_CONFIGS	.vscode/doodbasetup.py	/^PYLINT_CONFIGS = ($/;"	v
+ROOT	.vscode/doodbasetup.py	/^ROOT = path.abspath(path.join(DEST, "..", ".."))$/;"	v
+SCAFFOLDING_NAME	.vscode/doodbasetup.py	/^SCAFFOLDING_NAME = path.basename(path.abspath(ROOT))$/;"	v
 Todo	README.md	/^# Todo$/;"	c
+WORKSPACE	.vscode/doodbasetup.py	/^WORKSPACE = path.join(ROOT, "doodba.%s.code-workspace" % SCAFFOLDING_NAME)$/;"	v
 _logger	odoo/clone_oca_dependencies	/^_logger = logging.getLogger()$/;"	v
+addon_repos	.vscode/doodbasetup.py	/^addon_repos = glob(path.join(ROOT, "odoo", "custom", "src", "private"))$/;"	v
 args	.vscode/tasks.json	/^                    "args": [$/;"	a	object:tasks.1.options.shell
 args	.vscode/tasks.json	/^                    "args": [$/;"	a	object:tasks.3.options.shell
 args	.vscode/tasks.json	/^            "args": [$/;"	a	object:tasks.0
@@ -81,7 +84,6 @@ args	.vscode/tasks.json	/^            "args": [$/;"	a	object:tasks.7
 baseparser	.vscode/doodbasetup.py	/^baseparser = ConfigParser()$/;"	v
 build_dir	odoo/clone_oca_dependencies	/^        build_dir = os.environ['TRAVIS_BUILD_DIR']$/;"	v
 build_dir	odoo/clone_oca_dependencies	/^        build_dir = sys.argv[2]$/;"	v
-check_config	odoo/entrypoint.sh	/^function check_config() {$/;"	f
 command	.vscode/tasks.json	/^            "command": "docker-compose",$/;"	s	object:tasks.2
 command	.vscode/tasks.json	/^            "command": "docker-compose",$/;"	s	object:tasks.4
 command	.vscode/tasks.json	/^            "command": "docker-compose",$/;"	s	object:tasks.5
@@ -90,15 +92,11 @@ command	.vscode/tasks.json	/^            "command": "docker-compose",$/;"	s	obje
 command	.vscode/tasks.json	/^            "command": "env",$/;"	s	object:tasks.1
 command	.vscode/tasks.json	/^            "command": "env",$/;"	s	object:tasks.3
 command	.vscode/tasks.json	/^            "command": "python3",$/;"	s	object:tasks.0
-command	odoo/direxec	/^    command = os.path.join(folder, executable)$/;"	v
 configFile	.vscode/settings.json	/^        "configFile": ".vscode\/doodba\/.jslintrc",$/;"	s	object:eslint.options
 configurations	.vscode/launch.json	/^    "configurations": [$/;"	a
 cwd	.vscode/tasks.json	/^                "cwd": "${workspaceRoot}"$/;"	s	object:tasks.1.options
 cwd	.vscode/tasks.json	/^                "cwd": "${workspaceRoot}"$/;"	s	object:tasks.3.options
 deps_checkout_dir	odoo/clone_oca_dependencies	/^        deps_checkout_dir = osp.join(os.environ['HOME'], 'dependencies')$/;"	v
-dir_common	odoo/direxec	/^dir_common = os.path.join(dir_odoo, 'common', '%s.d' % mode)$/;"	v
-dir_custom	odoo/direxec	/^dir_custom = os.path.join(dir_odoo, 'custom', '%s.d' % mode)$/;"	v
-dir_odoo	odoo/direxec	/^dir_odoo = '\/opt\/odoo'$/;"	v
 echo	.vscode/tasks.json	/^                "echo": true,$/;"	b	object:tasks.0.presentation
 echo	.vscode/tasks.json	/^                "echo": true,$/;"	b	object:tasks.1.presentation
 env	.vscode/doodbasetup.py	/^env = env_vars_from_file(ENV_FILE)$/;"	v
@@ -107,9 +105,6 @@ eslint.options	.vscode/settings.json	/^    "eslint.options": {$/;"	o
 executable	.vscode/doodbasetup.py	/^    executable = shutil.which("python2") or shutil.which("python")$/;"	v
 executable	.vscode/tasks.json	/^                    "executable": "sh",$/;"	s	object:tasks.1.options.shell
 executable	.vscode/tasks.json	/^                    "executable": "sh",$/;"	s	object:tasks.3.options.shell
-extra_command	odoo/direxec	/^            extra_command = ($/;"	v
-extra_command	odoo/direxec	/^extra_command = sys.argv[1:]$/;"	v
-files	odoo/direxec	/^files = [(d, dir_common) for d in os.listdir(dir_common)]$/;"	v
 focus	.vscode/tasks.json	/^                "focus": false,$/;"	b	object:tasks.0.presentation
 focus	.vscode/tasks.json	/^                "focus": false,$/;"	b	object:tasks.1.presentation
 git_checkout	odoo/clone_oca_dependencies	/^def git_checkout(deps_checkout_dir, reponame, url, branch):$/;"	f
@@ -129,12 +124,12 @@ label	.vscode/tasks.json	/^            "label": "Start project in debug mode",$/
 label	.vscode/tasks.json	/^            "label": "Start project",$/;"	s	object:tasks.4
 label	.vscode/tasks.json	/^            "label": "Update git code",$/;"	s	object:tasks.1
 localRoot	.vscode/launch.json	/^                    "localRoot": "${workspaceRoot}\/odoo",$/;"	s	object:configurations.0.pathMappings.0
-mode	odoo/direxec	/^mode = os.path.basename(__file__)$/;"	v
 name	.vscode/launch.json	/^            "name": "Attach to running container",$/;"	s	object:configurations.0
 options	.vscode/tasks.json	/^            "options": {$/;"	o	object:tasks.1
 options	.vscode/tasks.json	/^            "options": {$/;"	o	object:tasks.3
 options	.vscode/tasks.json	/^            "options": {$/;"	o	object:tasks.5
 options	odoo/custom/conf.d/queue.conf	/^[options]$/;"	s
+options	odoo/custom/conf.d/running_env.conf	/^[options]$/;"	s
 osp	odoo/clone_oca_dependencies	/^import os.path as osp$/;"	I
 panel	.vscode/tasks.json	/^                "panel": "dedicated",$/;"	s	object:tasks.0.presentation
 panel	.vscode/tasks.json	/^                "panel": "dedicated",$/;"	s	object:tasks.1.presentation
@@ -167,12 +162,14 @@ quoting	.vscode/tasks.json	/^                    "quoting": "weak"$/;"	s	object:
 recommendations	.vscode/extensions.json	/^    "recommendations": [$/;"	a
 remoteRoot	.vscode/launch.json	/^                    "remoteRoot": "\/opt\/odoo"$/;"	s	object:configurations.0.pathMappings.0
 request	.vscode/launch.json	/^            "request": "attach",$/;"	s	object:configurations.0
+restructuredtext.confPath	.vscode/settings.json	/^    "restructuredtext.confPath": "",$/;"	s
 reveal	.vscode/tasks.json	/^                "reveal": "always",$/;"	s	object:tasks.0.presentation
 reveal	.vscode/tasks.json	/^                "reveal": "always",$/;"	s	object:tasks.1.presentation
 run	odoo/clone_oca_dependencies	/^def run(deps_checkout_dir, build_dir):$/;"	f
+running_env	odoo/custom/conf.d/running_env.conf	/^running_env = dev$/;"	k	section:options
 search.followSymlinks	.vscode/settings.json	/^    "search.followSymlinks": false,$/;"	b
 search.useIgnoreFiles	.vscode/settings.json	/^    "search.useIgnoreFiles": false,$/;"	b
-server_wide_modules	odoo/custom/conf.d/queue.conf	/^server_wide_modules = web,web_kanban,web_kanban_gauge,base_sparse_field,queue_job,connector$/;"	k	section:options
+server_wide_modules	odoo/custom/conf.d/queue.conf	/^server_wide_modules = web,web_kanban_gauge,base_sparse_field,queue_job,connector$/;"	k	section:options
 shell	.vscode/tasks.json	/^                "shell": {$/;"	o	object:tasks.1.options
 shell	.vscode/tasks.json	/^                "shell": {$/;"	o	object:tasks.3.options
 showReuseMessage	.vscode/tasks.json	/^                "showReuseMessage": false$/;"	b	object:tasks.0.presentation
@@ -195,3 +192,5 @@ value	.vscode/tasks.json	/^                    "value": "UID=$(id -u)",$/;"	s	ob
 value	.vscode/tasks.json	/^                    "value": "UMASK=$(umask)",$/;"	s	object:tasks.1.args.2
 version	.vscode/doodbasetup.py	/^version = env.get("ODOO_MINOR")$/;"	v
 version	.vscode/launch.json	/^    "version": "0.2.0",$/;"	s
+workspace_config	.vscode/doodbasetup.py	/^        workspace_config = json.load(fp)$/;"	v
+workspace_config	.vscode/doodbasetup.py	/^    workspace_config = {}$/;"	v

@@ -52,8 +52,8 @@ services:
         command:
             - odoo
             - --limit-memory-soft=0
-            - --limit-time-real-cron=0
-            - --limit-time-real=0
+            - --limit-time-real-cron=9999999
+            - --limit-time-real=9999999
             - --workers=0
             # XXX Odoo v8 has no `--dev` mode; Odoo v9 has no parameters
             - --dev=reload,qweb,werkzeug,xml
@@ -75,10 +75,12 @@ services:
             - "127.0.0.1:8025:8025"
 
     wdb:
-        image: yajo/wdb-server
+        image: kozea/wdb
         networks: *public
         ports:
             - "127.0.0.1:1984:1984"
+        # HACK https://github.com/Kozea/wdb/issues/136
+        stop_signal: KILL
 
     # Whitelist outgoing traffic for tests, reports, etc.
     cdnjs_cloudflare_proxy:
