@@ -40,11 +40,6 @@ ENV SUMMARY="Platform for building and running Odoo ${ODOO_VERSION} applications
 # RUN git clone --depth 1 https://github.com/OCA/maintainer-quality-tools.git /opt/maintainer-quality-tools  \
 #     && rm -rf /opt/maintainer-quality-tools/.git
 
-# COPY clone_oca_dependencies /opt/maintainer-quality-tools/travis/
-
-#Our version is launching as user
-# RUN /opt/maintainer-quality-tools/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
-
 #Fix odoo 9 build
 RUN pip install --upgrade pytz
 RUN python -m compileall /opt/odoo/src
