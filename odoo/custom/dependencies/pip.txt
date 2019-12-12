@@ -26,6 +26,8 @@ pyotp
 # auth_u2f
 python-u2flib-server
 responses
+bcrypt
+boto3
 
 ##Install deps in Dockerfile clone_oca_dependencies
 #-r https://raw.githubusercontent.com/OCA/l10n-spain/${ODOO_VERSION}/requirements.txt

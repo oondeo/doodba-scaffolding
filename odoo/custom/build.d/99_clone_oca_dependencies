@@ -1,0 +1,4 @@
+
+#!/bin/sh
+
+/mqt/travis/clone_oca_dependencies /opt/odoo/custom/src /opt/odoo/custom/src
