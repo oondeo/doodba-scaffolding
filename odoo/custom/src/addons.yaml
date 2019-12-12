@@ -3,8 +3,9 @@
 #   ODOO_VERSION:
 #     - '11.0'
 #     - '12.0'
-# queue: ["*"]
-# connector: ["*"]
+queue: ["*"]
+connector: ["*"]
+storage: ["*"]
 # server-auth: ["*"]
 # server-ux: ["*"]
 # social: ["*"]
